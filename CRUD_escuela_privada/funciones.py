@@ -1,6 +1,673 @@
 from BD.conexion import Conexion
 import os
+import mysql.connector
 
+def listaAlumnos():
+    try:
+        conexion = Conexion()
+        cone = conexion.conexionBD()  # Usa el atributo `.conexion` de la clase Conexion
+        cursor = cone.cursor()
+
+        sql = "SELECT legajo, apellido, nombre FROM alumnos ORDER BY apellido ASC"
+        cursor.execute(sql)
+        resultado = cursor.fetchall()
+        if not resultado:
+            print("No hay alumnos registrados.")
+            return
+
+        print("Listado de alumnos")
+        for alumnos in resultado:
+            print(
+                f"Legajo: {alumnos[0]}, Apellido: {alumnos[1]}, nombre: {alumnos[2]}")
+
+            print("-"*50)
+
+    except mysql.connector.Error as error:
+        print("Error al mostrar los datos Error: {}".format(error))
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+
+def listaProfesores():
+    try:
+        conexion = Conexion()
+        cone = conexion.conexionBD()  # Usa el atributo `.conexion` de la clase Conexion
+        cursor = cone.cursor()
+
+        sql = "SELECT idprofesor, apellido, nombre FROM profesores ORDER BY apellido ASC"
+        cursor.execute(sql)
+        resultado = cursor.fetchall()
+        if not resultado:
+            print("No hay profesores registrados.")
+            return
+
+        print("Listado de profesores")
+        for profesor in resultado:
+            print(
+                f"Legajo: {profesor[0]}, Apellido: {profesor[1]}, nombre: {profesor[2]}")
+
+            print("-"*50)
+
+    except mysql.connector.Error as error:
+        print("Error al mostrar los datos Error: {}".format(error))
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+
+
+def ingresarAlumnos():
+    try:
+        # Crear una instancia de la conexión
+        conexion = Conexion()
+        cone = conexion.conexionBD()  # Usa el atributo `.conexion` de la clase Conexion
+        cursor = cone.cursor()
+
+        legajo = input("Ingrese el legajo del alumno: ")
+        # Ingreso de nombre del alumno
+        nombre = input("Ingrese el nombre del alumno: ")
+        while not nombre.isalpha() or len(nombre) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            nombre = input("Ingrese el nombre del alumno: ")
+        # Ingreso de apellido del alumno
+        apellido = input("Ingrese el apellido del alumno: ")
+        while not apellido.isalpha() or len(apellido) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            apellido = input("Ingrese el apellido del alumno: ")
+        # Ingreso de dni del alumno
+        dni = input("Ingrese el DNI del alumno: ")
+        if len(dni) !=8 or not dni.isdigit():
+            while(len(dni) !=8 or not dni.isdigit()):
+                print("El DNI debe contener 8 digitos.")
+                dni = input("Ingrese el dni del alumno: ")
+        # Ingreso de direccion del alumno
+        direccion = input("Ingrese la dirección del alumno: ")
+        # Ingreso de direccion del alumno
+        opciones_validas = ["Masculino", "Femenino", "Transgenero", "No binario"]
+        genero = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
+        while not genero.replace(" ", "").isalpha() or genero not in opciones_validas:
+            print("Porfavor solo ingresar caracteres.")
+            genero = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
+        # Ingreso de la fecha de nacimiento del alumno
+        fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
+        # Ingreso del email del alumno
+        email = input("Ingrese el email del alumno: ")
+        # Ingreso del curso del alumno
+        cursos_idCurso = input("Ingrese el ID del curso al que pertenece: ")
+
+        # Consulta SQL para insertar datos
+        sql = """INSERT INTO alumnos (legajo, nombre, apellido, dni, direccion, genero,
+                 fechaNacimiento, email, cursos_idCurso)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        valores = (legajo, nombre.title(), apellido.title(), dni, direccion.title(),
+                   genero, fechaNacimiento, email.lower(), cursos_idCurso)
+
+        # Ejecutar la consulta
+        cursor.execute(sql, valores)
+        cone.commit()  # Confirmar los cambios en la base de datos
+        print(f"{cursor.rowcount} registro(s) ingresado(s) exitosamente.")
+
+        # Cerrar el cursor y la conexión
+        cursor.close()
+        cone.close()
+    except mysql.connector.Error as error:
+        print("Error al ingresar datos: {}".format(error))
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+
+
+def ingresarProfesor():
+    try:
+        conexion = Conexion()
+        cone = conexion.conexionBD()
+        cursor = cone.cursor()
+        # Solicitar datos del Profesor
+        # Ingreso nombre del alumno
+        nombre = input("Ingrese el nombre del Profesor: ")
+        while not nombre.isalpha() or len(nombre) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            nombre = input("Ingrese el nombre del Profesor: ")
+        # Ingreso apellido del alumno
+        apellido = input("Ingrese el apellido del Profesor: ")
+        while not apellido.isalpha() or len(apellido) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            apellido = input("Ingrese el apellido del Profesor: ")
+        # Ingreso telefono del alumno
+        telefono = input("Ingrese el telefono del Profesor: ")
+        # Ingreso email del alumno
+        email = input("Ingrese la email del Profesor: ")
+        # Ingreso dni del alumno
+        dni = input("Ingrese el dni del Profesor: ")
+        if len(dni) !=8 or not dni.isdigit():
+            while(len(dni) !=8 or not dni.isdigit()):
+                print("El DNI debe contener 8 digitos.")
+                dni = input("Ingrese el dni del Profesor: ")
+
+        fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
+
+        matricula = input("Ingrese el matricula del Profesor: ")
+
+        direccion = input("Ingrese la direccion del Profesor: ")
+
+        horas = input("Ingrese las horas: ")
+
+        sueldo = input("Ingrese el sueldo: ")
+
+        # Consulta SQL para insertar datos
+
+        sql = """INSERT INTO profesores (nombre, apellido, telefono, email,
+                   dni, fechaNacimiento, matricula, direccion, horas, sueldo)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s,%s)"""
+        valores = (nombre.title(), apellido.title(), telefono, email,
+                   dni, fechaNacimiento, matricula, direccion.title(), horas, sueldo)  # idProfesor
+
+        # Ejecutar la consulta
+        cursor.execute(sql, valores)
+        cone.commit()  # Confirmar los cambios en la base de datos
+        print(f"{cursor.rowcount} registro(s) ingresado(s) exitosamente.")
+
+        # Cerrar el cursor y la conexión
+        cursor.close()
+        cone.close()
+    except mysql.connector.Error as error:
+        print("Error al ingresar datos: {}".format(error))
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+
+
+def modificarAlumno():
+    listaAlumnos()
+    try:
+        # Conectar a la base de datos
+        conexion = Conexion()
+        cone = conexion.conexionBD()  # Usa el atributo `.conexion` de la clase Conexion
+        cursor = cone.cursor()
+
+        # Solicitar el legajo del alumno que se desea modificar
+        legajo = input("Ingrese el legajo del alumno que desea modificar: ")
+
+        # Verificar si el alumno existe
+        select = "SELECT * FROM alumnos WHERE legajo = %s"
+        cursor.execute(select, (legajo,))
+        # En Python, el método fetchone() se utiliza para devolver una sola fila de resultados de una consulta SQL
+        resultado = cursor.fetchone()
+
+        if not resultado:
+            print("No se encontró un alumno con el legajo proporcionado.")
+            return
+
+        print("Datos actuales del alumno:")
+        print(
+            f"\nLegajo: {resultado[0]}\nNombre: {resultado[1]}\nApellido: {resultado[2]}\nDNI: {resultado[3]}")
+        print(
+            f"Dirección: {resultado[4]}\nGénero: {resultado[5]}\nFecha de Nacimiento: {resultado[6]}")
+        print(f"Email: {resultado[7]}\nCurso ID: {resultado[8]}\n")
+
+        # Solicitar nuevos datos
+        print("\nIngrese los nuevos datos del alumno :")
+
+        nlegajo = input("Legajo : ")
+
+        nombre = input("Nombre : ")
+        while not nombre.isalpha() or len(nombre) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            nombre = input("Ingrese el Nombre del Profesor: ")
+
+        apellido = input("Apellido : ")
+        while not apellido.isalpha() or len(apellido) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            apellido = input("Ingrese el apellido del Profesor: ")
+
+        dni = input("DNI : ")
+        if len(dni) !=8 or not dni.isdigit():
+            while(len(dni) !=8 or not dni.isdigit()):
+                print("El DNI debe contener 8 digitos.")
+                dni = input("Ingrese el dni del Alumno: ")
+
+        direccion = input("Dirección : ")
+
+        opciones_validas = ["Masculino", "Femenino", "Transgenero", "No binario"]
+        genero = input("Género : ")
+        while not genero.replace(" ", "").isalpha() or genero not in opciones_validas:
+            print("Porfavor solo ingresar caracteres.")
+            genero = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
+
+        fechaNacimiento = input("Fecha de Nacimiento (YYYY-MM-DD) : ")
+
+        email = input("Email : ")
+
+        curso_id = input("Curso ID : ")
+
+        # Actualizar datos en la base de datos
+        sql = """UPDATE alumnos
+                        SET legajo = %s, nombre = %s, apellido = %s, dni = %s, direccion = %s, genero = %s,
+                            fechaNacimiento = %s, email = %s, cursos_idCurso = %s
+                        WHERE legajo = %s"""
+        valores = (nlegajo, nombre.title(), apellido.title(), dni, direccion.title(), genero,
+                   fechaNacimiento, email.lower(), curso_id, legajo)
+
+        cursor.execute(sql, valores)
+        cone.commit()
+
+        print(
+            "Datos del alumno  actualizados correctamente.")
+
+        # Cerrar la conexión
+        cursor.close()
+        cone.close()
+
+    except mysql.connector.Error as error:
+        print(f"Error al modificar los datos: {error}")
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+
+
+def modificarProfesor():
+    listaProfesores()
+    try:
+        # Conectar a la base de datos
+        conexion = Conexion()
+        cone = conexion.conexionBD()  # Usa el atributo `.conexion` de la clase Conexion
+        cursor = cone.cursor()
+
+        # Solicitar el legajo del alumno que se desea modificar
+        idProfesor = input("Ingrese el Id del Profesor que desea modificar: ")
+
+        # Verificar si el alumno existe
+        select = "SELECT * FROM profesores WHERE idProfesor = %s"
+        cursor.execute(select, (idProfesor,))
+        # En Python, el método fetchone() se utiliza para devolver una sola fila de resultados de una consulta SQL
+        resultado = cursor.fetchone()
+
+        if not resultado:
+            print("No se encontró un profesor con el id proporcionado.")
+            return
+
+        print("Datos actuales del profesor:")
+        print(
+            f"\nidProfesor: {resultado[0]}\nNombre: {resultado[1]}\nApellido: {resultado[2]}\nTelefono: {resultado[3]}")
+        print(
+            f"Email: {resultado[4]}\nDni: {resultado[5]}\nFecha de Nacimiento: {resultado[6]}")
+        print(
+            f"Matricula: {resultado[7]}\nDireccion: {resultado[8]}\nHoras: {resultado[9]}\nSueldo: {resultado[10]}")
+
+        # Solicitar nuevos datos
+        print("\nIngrese los nuevos datos del profesor:")
+
+        nombre = input("Ingrese el nombre del Profesor: ")
+        while not nombre.isalpha() or len(nombre) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            nombre = input("Ingrese el nombre del Profesor: ")
+
+        apellido = input("Ingrese el apellido del Profesor: ")
+        while not apellido.isalpha() or len(apellido) < 3:
+            print("Por favor, solo ingrese caracteres.")
+            apellido = input("Ingrese el apellido del Profesor: ")
+
+        telefono = input("Ingrese el telefono del Profesor: ")
+
+        email = input("Ingrese la email del Profesor: ")
+
+        dni = input("Ingrese el dni del Profesor: ")
+        if len(dni) !=8 or not dni.isdigit():
+            while(len(dni) !=8 or not dni.isdigit()):
+                print("El DNI debe contener 8 digitos.")
+                dni = input("Ingrese el dni del Profesor: ")
+
+        fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
+
+        matricula = input("Ingrese el matricula del Profesor: ")
+
+        direccion = input("Ingrese la direccion del Profesor: ")
+
+        horas = input("Ingrese las horas: ")
+
+        sueldo = input("Ingrese el sueldo: ")
+
+
+        # Actualizar datos en la base de datos
+        sql = """UPDATE profesores SET nombre = %s, apellido = %s, telefono = %s, email = %s, dni = %s, fechaNacimiento = %s, matricula = %s, direccion = %s , horas = %s ,sueldo = %s  WHERE idProfesor = %s """
+        valores = (nombre.title(), apellido.title(), telefono, email.lower(), dni,
+                   fechaNacimiento, matricula, direccion.title(), horas, sueldo, idProfesor)
+
+        cursor.execute(sql, valores)
+        cone.commit()
+
+        print("Datos del profesor actualizados correctamente.")
+
+        # Cerrar la conexión
+        cursor.close()
+        cone.close()
+
+    except mysql.connector.Error as error:
+        print(f"Error al modificar los datos: {error}")
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+
+
+def modificarAlumnoEspecifico():
+
+    listaAlumnos()
+    try:
+        # Conectar a la base de datos
+        conexion = Conexion()
+        cone = conexion.conexionBD()
+        cursor = cone.cursor()
+
+        # Solicitar el legajo del alumno que se desea modificar
+        legajo = input("Ingrese el legajo del alumno que desea modificar: ")
+
+        select = "SELECT * FROM alumnos WHERE legajo = %s"
+        cursor.execute(select, (legajo,))
+        resultado = cursor.fetchone()
+
+        if not resultado:
+            print("No se encontró un alumno con el legajo proporcionado.")
+            return
+
+        print("Datos actuales del alumno:")
+        print(
+            f"\n[1] . Legajo: {resultado[0]}\n[2] . Nombre: {resultado[1]}\n[3] . Apellido: {resultado[2]}\n[4] . DNI: {resultado[3]}")
+        print(
+            f"[5] . Dirección: {resultado[4]}\n[6] . Género: {resultado[5]}\n[7] . Fecha de Nacimiento: {resultado[6]}")
+        print(f"[8] . Email: {resultado[7]}\n[9] . Curso ID: {resultado[8]}\n")
+
+        # menu
+
+        menu = int(input("¿Qué dato desea modificar?: "))
+        if menu == 1:
+
+            nlegajo = input("Legajo: ")
+
+            sql = "UPDATE alumnos SET legajo = %s WHERE legajo = %s"
+            valor = (nlegajo, legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 2:
+
+            nombre = input("Nombre: ")
+            while not nombre.isalpha() or len(nombre) < 3:
+                print("Por favor, solo ingrese caracteres.")
+                nombre = input("Ingrese el nombre del Alumno: ")
+            
+            sql = "UPDATE alumnos SET Nombre = %s WHERE legajo = %s"
+            valor = (nombre.title(), legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 3:
+
+            apellido = input("Apellido: ")
+            while not apellido.isalpha() or len(apellido) < 3:
+                print("Por favor, solo ingrese caracteres.")
+                apellido = input("Ingrese el apellido del Alumno: ")
+
+            sql = "UPDATE alumnos SET apellido = %s WHERE legajo = %s"
+            valor = (apellido.title(), legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 4:
+
+            dni = input("DNI: ")
+            if len(dni) !=8 or not dni.isdigit():
+                while(len(dni) !=8 or not dni.isdigit()):
+                    print("El DNI debe contener 8 digitos.")
+                    dni = input("Ingrese el dni del Alumno: ")
+
+            sql = "UPDATE alumnos SET dni = %s WHERE legajo = %s"
+            valor = (dni, legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 5:
+
+            direccion = input("Direccion: ")
+
+            sql = "UPDATE alumnos SET direccion = %s WHERE legajo = %s"
+            valor = (direccion.title(), legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 6:
+            opciones_validas = ["Masculino", "Femenino", "Transgenero", "No binario"]
+            genero = input("Genero: ")
+            while not genero.replace(" ", "").isalpha() or genero not in opciones_validas:
+                print("Porfavor solo ingresar caracteres.")
+                genero = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
+            sql = "UPDATE alumnos SET genero = %s WHERE legajo = %s"
+            valor = (genero, legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 7:
+
+            fechaNacimiento = input("Fecha de  nacimiento: ")
+
+            sql = "UPDATE alumnos SET fechaNacimiento = %s WHERE legajo = %s"
+            valor = (fechaNacimiento, legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 8:
+
+            email = input("Email: ")
+
+            sql = "UPDATE alumnos SET email = %s WHERE legajo = %s"
+            valor = (email.lower(), legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 9:
+
+            cursos_idCurso = input("Curso: ")
+
+            sql = "UPDATE alumnos SET cursos_idCurso = %s WHERE legajo = %s"
+            valor = (cursos_idCurso, legajo)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+    except mysql.connector.Error as error:
+        print(f"Error al modificar los datos: {error}")
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+
+
+def modificarProfesorEspecifico():
+
+    listaProfesores()
+    try:
+        # Conectar a la base de datos
+        conexion = Conexion()
+        cone = conexion.conexionBD()
+        cursor = cone.cursor()
+
+        # Solicitar el legajo del profesor que se desea modificar
+        idProfesor = input(
+            "Ingrese el id del Profesor que desea modificar: ")
+
+        select = "SELECT * FROM profesores WHERE idProfesor = %s"
+        cursor.execute(select, (idProfesor,))
+        resultado = cursor.fetchone()
+
+        if not resultado:
+            print("No se encontró un alumno con el legajo proporcionado.")
+            return
+
+        print("Datos actuales del profesor:")
+        print(
+            f"\n[1] . Nombre: {resultado[1]}\n[2] . Apellido: {resultado[2]}\n[3] . Telefono: {resultado[3]}")
+        print(
+            f"[4] . Email: {resultado[4]}\n[5] . Dni: {resultado[5]}\n[6] . Fecha de Nacimiento: {resultado[6]}")
+        print(
+            f"[7] . Matricula: {resultado[7]}\n[8] . Direccion: {resultado[8]}\n[9] . Horas: {resultado[9]}\n[10] . Sueldo: {resultado[10]}")
+
+        # menu
+
+        menu = int(input("¿Qué dato desea modificar? :"))
+        if menu == 1:
+
+            nombre = input("Nombre: ")
+            while not nombre.isalpha() or len(nombre) < 3:
+                print("Por favor, solo ingrese caracteres.")
+                nombre = input("Ingrese el nombre del Profesor: ")
+
+            sql = "UPDATE profesores SET Nombre = %s WHERE idProfesor = %s"
+            valor = (nombre.title(), idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 2:
+
+            apellido = input("Apellido: ")
+            while not apellido.isalpha() or len(apellido) < 3:
+                print("Por favor, solo ingrese caracteres.")
+                apellido = input("Ingrese el apellido del Profesor: ")
+
+            sql = "UPDATE profesores SET apellido = %s WHERE idProfesor = %s"
+            valor = (apellido.title(), idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 3:
+
+            telefono = input("Telefono: ")
+            sql = "UPDATE profesores SET telefono = %s WHERE idProfesor = %s"
+            valor = (telefono, idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 4:
+
+            email = input("Email: ")
+
+            sql = "UPDATE profesores SET email = %s WHERE idProfesor = %s"
+            valor = (email.lower(), idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 5:
+
+            dni = input("Dni: ")
+            if len(dni) !=8 or not dni.isdigit():
+                while(len(dni) !=8 or not dni.isdigit()):
+                    print("El DNI debe contener 8 digitos.")
+                    dni = input("Ingrese el dni del Profesor: ")
+            sql = "UPDATE profesores SET dni = %s WHERE idProfesor = %s"
+            valor = (dni, idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 6:
+
+            fechaNacimiento = input("Fecha de  nacimiento: ")
+
+            sql = "UPDATE profesores SET fechaNacimiento = %s WHERE idProfesor = %s"
+            valor = (fechaNacimiento, idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 7:
+
+            matricula = input("Matricula: ")
+
+            sql = "UPDATE profesores SET matricula = %s WHERE idProfesor = %s"
+            valor = (matricula, idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 8:
+
+            direccion = input("Direccion: ")
+
+            sql = "UPDATE profesores SET direccion = %s WHERE idProfesor = %s"
+            valor = (direccion.title(), idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 9:
+
+            horas = input("Horas: ")
+
+            sql = "UPDATE profesores SET horas = %s WHERE idProfesor = %s"
+            valor = (horas, idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+        elif menu == 10:
+
+            sueldo = input("Sueldo: ")
+
+            sql = "UPDATE profesores SET sueldo = %s WHERE idProfesor = %s"
+            valor = (sueldo, idProfesor)
+            cursor.execute(sql, (valor))
+            cone.commit()
+
+            print("datos actualizado correctamente.")
+
+    except mysql.connector.Error as error:
+        print(f"Error al modificar los datos: {error}")
+    finally:
+        if cursor:
+            cursor.close()
+        if cone:
+            cone.close()
+# Funcion para buscar a un alumno en especifico
 def buscarEspecificoProfesor(dato, comandoSQL):
     conexion_instacia = Conexion() #Creo una instancia de la conexión
     conexion = conexion_instacia.conexionBD() #Crear una instancia de la conexión
@@ -34,9 +701,7 @@ def buscarEspecificoProfesor(dato, comandoSQL):
     finally:
         cursor.close()  # Cerrar el cursor
         conexion.close()  # Cerrar la conexión
-
-
-
+# Funcion para buscar a un alumno en especifico
 def buscarEspecificoAlumnos(dato, comandoSQL):
     conexion_instancia = Conexion()  #Creo una instancia de la conexión
     conexion = conexion_instancia.conexionBD() #Obtengo la conexión a la base de datos
@@ -71,7 +736,6 @@ def buscarEspecificoAlumnos(dato, comandoSQL):
     finally:
         cursor.close()  # Cerrar el cursor
         conexion.close()  # Cerrar la conexión
-
 # Funcion mostrar profesores
 def motrarProfes():
     conexion_instancia = Conexion()  # Crear una instancia de la conexión
@@ -89,7 +753,6 @@ def motrarProfes():
     finally:
         cursor.close()  # Cerrar el cursor
         conexion.close()  # Cerrar la conexión
-
 # Funcion mostrar alumnos
 def motrarAlumnos():
     conexion_instancia = Conexion()  # Crear una instancia de la conexión
