@@ -1,5 +1,5 @@
 from BD.conexion import Conexion
-import funciones # Importar el módulo que contiene la función buscarPorDni
+import funciones
 import os
 
 def menuPrincipal():
