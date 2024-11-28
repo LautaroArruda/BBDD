@@ -18,7 +18,6 @@ def menuPrincipal():
             print("Saliendo del sistema")
             break
         else:
-            print("Opcion invalida")
             ejecutarOpcion(opcion)
 
 def ejecutarOpcion(opcion):
@@ -32,7 +31,6 @@ def ejecutarOpcion(opcion):
             funciones.ingresarAlumnos()
         elif opcion == 2:
             funciones.ingresarProfesor()
-
     elif opcion == 2:
         print("Que datos desea modificar?")
         print("[1]. modificar datos de Alumnos")
@@ -43,6 +41,7 @@ def ejecutarOpcion(opcion):
             print("Alumnos")
             print("[1]. modificar todos los datos")
             print("[2]. modificar un dato específico")
+            print("[3]. volver atras")
             opcion = int(input("Seleccione una opción: "))
             if opcion == 1:
                 funciones.modificarAlumno()
@@ -56,8 +55,7 @@ def ejecutarOpcion(opcion):
             if opcion == 1:
                 funciones.modificarProfesor()
             elif opcion == 2:
-                funciones.modificarProfesorEspecifico()
-
+                funciones.modificarProfesorEspecifico()         
     elif opcion == 3:  # Mostrar datos
         while True:
             print("\nElija una opción")
@@ -139,7 +137,7 @@ def ejecutarOpcion(opcion):
                                 print("Porfavor solo ingresar caracteres.")
                                 dato = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
                             funciones.buscarEspecificoAlumnos(dato, comandoSQL)
-                        elif opcion == 6:
+                        elif opcion2 == 6:
                             print("Volviendo")
                             break
                         else:
@@ -206,11 +204,16 @@ def ejecutarOpcion(opcion):
                         elif opcion == 6:
                             print("Volviendo")
                             break
+                    elif opcion == 3:
+                        print("Volviendo")
+                        break
+                    else:
+                        print("Opcion invalida")
             elif opcion == 4:
                 print("Volviendo")
                 break
             else:
-                print("Opcion invalida")            
+                print("Opcion invalida")                        
     # Eliminar datos
     elif opcion == 4:  
         while True:

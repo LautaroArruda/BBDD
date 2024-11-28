@@ -95,19 +95,19 @@ def ingresarAlumnos():
 
         # Ingreso de direccion del alumno
         opciones_validas = ["Masculino", "Femenino", "Transgenero", "No binario"]
-        genero = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
+        genero = input("Ingresar genero (masculino, femenino, transgenero y no binario): ").capitalize()
         while not genero.replace(" ", "").isalpha() or genero not in opciones_validas:
             print("Porfavor solo ingresar caracteres.")
-            genero = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
+            genero = input("Ingresar genero (masculino, femenino, transgenero y no binario): ").capitalize()
 
         # Ingreso de la fecha de nacimiento del alumno
         fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
 
         # Ingreso del email del alumno
-        email = input("Ingrese la email del Profesor: ").strip()
+        email = input("Ingrese el email del Alumno: ").strip().lower()
         while "@" not in email:
             print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del profesor: ").strip()
+            email = input("Ingrese el email del Alumno: ").strip().lower()
 
         # Ingreso del curso del alumno
         cursos_idCurso = input("Ingrese el ID del curso al que pertenece (1-6): ")
@@ -166,10 +166,10 @@ def ingresarProfesor():
                 telefono = input("Ingrese el telefono del profesor: ").strip()
 
         # Ingreso email del alumno
-        email = input("Ingrese la email del Profesor: ").strip()
+        email = input("Ingrese la email del Profesor: ").strip().lower()
         while "@" not in email:
             print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del profesor: ").strip()
+            email = input("Ingrese el email del profesor: ").strip().lower()
 
         # Ingreso dni del alumno
         dni = input("Ingrese el dni del Profesor: ").strip()
@@ -181,9 +181,9 @@ def ingresarProfesor():
         fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
 
         matricula = input("Ingrese el matricula del Profesor: ").strip()
-        while not dato.isalnum():
+        while not matricula.isalnum():
             print("Porfavor solo ingresar caracteres alfanumerico.")
-            dato = input("Ingresar matricula").strip()
+            matricula = input("Ingresar matricula").strip()
 
         direccion = input("Ingrese la direccion del Profesor: ").strip()
         while len(direccion) < 3:
@@ -288,10 +288,10 @@ def modificarAlumno():
 
         fechaNacimiento = input("Fecha de Nacimiento (YYYY-MM-DD) : ")
 
-        email = input("Email: ").strip()
+        email = input("Email: ").strip().lower
         while "@" not in email:
-            print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del Alumno: ").strip()
+            print("El email no es válido. Debe contener un '@'.")
+            email = input("Ingrese el email del Alumno: ").strip().lower
 
         curso_id = input("Curso ID : ").strip()
         while not curso_id.isdigit() or int(curso_id) < 1 or int(curso_id) > 6:
@@ -372,10 +372,10 @@ def modificarProfesor():
                 print("El telefono debe contener 10 digitos.")
                 telefono = input("Ingrese el telefono del profesor: ").strip()
 
-        email = input("Ingrese la email del Profesor: ").strip()
+        email = input("Ingrese la email del Profesor: ").strip().lower
         while "@" not in email:
             print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del profesor: ").strip()
+            email = input("Ingrese el correo electrónico del profesor: ").strip().lower
 
         dni = input("Ingrese el dni del Profesor: ").strip()
         if len(dni) !=8 or not dni.isdigit():
@@ -548,10 +548,10 @@ def modificarAlumnoEspecifico():
 
         elif menu == 8:
 
-            email = input("Email: ").strip()
+            email = input("Email: ").strip().lower()
             while "@" not in email:
                 print("El correo electrónico no es válido. Debe contener un '@'.")
-                email = input("Ingrese el correo electrónico del profesor: ").strip()
+                email = input("Ingrese el correo electrónico del profesor: ").strip().lower()
 
             sql = "UPDATE alumnos SET email = %s WHERE legajo = %s"
             valor = (email.lower(), legajo)
@@ -660,10 +660,10 @@ def modificarProfesorEspecifico():
 
         elif menu == 4:
 
-            email = input("Email: ").strip()
+            email = input("Email: ").strip().lower()
             while "@" not in email:
                 print("El correo electrónico no es válido. Debe contener un '@'.")
-                email = input("Ingrese el correo electrónico del profesor: ").strip()
+                email = input("Ingrese el correo electrónico del profesor: ").strip().lower()
 
             sql = "UPDATE profesores SET email = %s WHERE idProfesor = %s"
             valor = (email.lower(), idProfesor)
