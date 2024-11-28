@@ -69,29 +69,29 @@ def ingresarAlumnos():
         legajo = input("Ingrese el legajo del alumno: ")
 
         # Ingreso de nombre del alumno
-        nombre = input("Ingrese el nombre del alumno: ")
+        nombre = input("Ingrese el nombre del alumno: ").strip()
         while not nombre.isalpha() or len(nombre) < 3:
             print("Por favor, solo ingrese caracteres.")
-            nombre = input("Ingrese el nombre del alumno: ")
+            nombre = input("Ingrese el nombre del alumno: ").strip()
 
         # Ingreso de apellido del alumno
-        apellido = input("Ingrese el apellido del alumno: ")
+        apellido = input("Ingrese el apellido del alumno: ").strip()
         while not apellido.isalpha() or len(apellido) < 3:
             print("Por favor, solo ingrese caracteres.")
-            apellido = input("Ingrese el apellido del alumno: ")
+            apellido = input("Ingrese el apellido del alumno: ").strip()
 
         # Ingreso de dni del alumno
-        dni = input("Ingrese el DNI del alumno: ")
+        dni = input("Ingrese el DNI del alumno: ").strip()
         if len(dni) !=8 or not dni.isdigit():
             while(len(dni) !=8 or not dni.isdigit()):
                 print("El DNI debe contener 8 digitos.")
-                dni = input("Ingrese el dni del alumno: ")
+                dni = input("Ingrese el dni del alumno: ").strip()
 
         # Ingreso de direccion del alumno
-        direccion = input("Ingrese la dirección del alumno: ")
+        direccion = input("Ingrese la dirección del alumno: ").strip()
         while len(direccion) < 3:
             print("Por favor, ingrese una direccion valida")
-            direccion = input("Ingrese el dirección del Alumno: ")
+            direccion = input("Ingrese el dirección del Alumno: ").strip()
 
         # Ingreso de direccion del alumno
         opciones_validas = ["Masculino", "Femenino", "Transgenero", "No binario"]
@@ -104,10 +104,10 @@ def ingresarAlumnos():
         fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
 
         # Ingreso del email del alumno
-        email = input("Ingrese la email del Profesor: ")
+        email = input("Ingrese la email del Profesor: ").strip()
         while "@" not in email:
             print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del profesor: ")
+            email = input("Ingrese el correo electrónico del profesor: ").strip()
 
         # Ingreso del curso del alumno
         cursos_idCurso = input("Ingrese el ID del curso al que pertenece (1-6): ")
@@ -147,52 +147,59 @@ def ingresarProfesor():
         # Solicitar datos del Profesor
 
         # Ingreso nombre del alumno
-        nombre = input("Ingrese el nombre del Profesor: ")
+        nombre = input("Ingrese el nombre del Profesor: ").strip()
         while not nombre.isalpha() or len(nombre) < 3:
             print("Por favor, solo ingrese caracteres.")
-            nombre = input("Ingrese el nombre del Profesor: ")
+            nombre = input("Ingrese el nombre del Profesor: ").strip()
 
         # Ingreso apellido del alumno
-        apellido = input("Ingrese el apellido del Profesor: ")
+        apellido = input("Ingrese el apellido del Profesor: ").strip()
         while not apellido.isalpha() or len(apellido) < 3:
             print("Por favor, solo ingrese caracteres.")
-            apellido = input("Ingrese el apellido del Profesor: ")
+            apellido = input("Ingrese el apellido del Profesor: ").strip()
 
         # Ingreso telefono del alumno
-        telefono = input("Ingrese el telefono del Profesor: ")
+        telefono = input("Ingrese el telefono del Profesor: ").strip()
         if len(telefono) != 10 or not telefono.isdigit():
             while (len(telefono) != 10 or not telefono.isdigit()):
                 print("El telefono debe contener 10 digitos.")
-                telefono = input("Ingrese el telefono del profesor: ")
+                telefono = input("Ingrese el telefono del profesor: ").strip()
 
         # Ingreso email del alumno
-        email = input("Ingrese la email del Profesor: ")
+        email = input("Ingrese la email del Profesor: ").strip()
         while "@" not in email:
             print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del profesor: ")
+            email = input("Ingrese el correo electrónico del profesor: ").strip()
 
         # Ingreso dni del alumno
-        dni = input("Ingrese el dni del Profesor: ")
+        dni = input("Ingrese el dni del Profesor: ").strip()
         if len(dni) !=8 or not dni.isdigit():
             while(len(dni) !=8 or not dni.isdigit()):
                 print("El DNI debe contener 8 digitos.")
-                dni = input("Ingrese el dni del Profesor: ")
+                dni = input("Ingrese el dni del Profesor: ").strip()
 
         fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
 
-        matricula = input("Ingrese el matricula del Profesor: ")
+        matricula = input("Ingrese el matricula del Profesor: ").strip()
+        while not dato.isalnum():
+            print("Porfavor solo ingresar caracteres alfanumerico.")
+            dato = input("Ingresar matricula").strip()
 
-        direccion = input("Ingrese la direccion del Profesor: ")
+        direccion = input("Ingrese la direccion del Profesor: ").strip()
         while len(direccion) < 3:
             print("Por favor, ingrese una direccion valida")
-            direccion = input("Ingrese el nombre del Profesor: ")
+            direccion = input("Ingrese el nombre del Profesor: ").strip()
 
-        horas = input("Ingrese las horas: ")
+        horas = input("Ingrese las horas: ").strip()
+        if len(dni) < 1 or not dni.isdigit():
+            while(len(dni) < 1 or not dni.isdigit()):
+                print("Las horas no pueden ser menor a 1.")
+                dni = input("Ingrese las horas: ").strip()
 
-        sueldo = input("Ingrese el sueldo del profesor: ")
-        while not sueldo.isdigit() or int(sueldo) <= 20000:
-            print("El sueldo debe ser un número mayor a 20,000.")
-            sueldo = input("Ingrese el sueldo del profesor: ")
+        sueldo = input("Ingrese el sueldo del profesor: ").strip()
+        while not sueldo.isdigit() or int(sueldo) <= 200000:
+            print("El sueldo debe ser un número mayor a 200000.")
+            sueldo = input("Ingrese el sueldo del profesor: ").strip()
 
         # Consulta SQL para insertar datos
 
@@ -228,7 +235,7 @@ def modificarAlumno():
         cursor = cone.cursor()
 
         # Solicitar el legajo del alumno que se desea modificar
-        legajo = input("Ingrese el legajo del alumno que desea modificar: ")
+        legajo = input("Ingrese el legajo del alumno que desea modificar: ").strip()
 
         # Verificar si el alumno existe
         select = "SELECT * FROM alumnos WHERE legajo = %s"
@@ -252,44 +259,44 @@ def modificarAlumno():
 
         nlegajo = input("Legajo : ")
 
-        nombre = input("Nombre : ")
+        nombre = input("Nombre : ").strip()
         while not nombre.isalpha() or len(nombre) < 3:
             print("Por favor, solo ingrese caracteres.")
-            nombre = input("Ingrese el Nombre del Alumno: ")
+            nombre = input("Ingrese el Nombre del Alumno: ").strip()
 
-        apellido = input("Apellido : ")
+        apellido = input("Apellido : ").strip()
         while not apellido.isalpha() or len(apellido) < 3:
             print("Por favor, solo ingrese caracteres.")
-            apellido = input("Ingrese el apellido del Alumno: ")
+            apellido = input("Ingrese el apellido del Alumno: ").strip()
 
-        dni = input("DNI : ")
+        dni = input("DNI : ").strip()
         if len(dni) !=8 or not dni.isdigit():
             while(len(dni) !=8 or not dni.isdigit()):
                 print("El DNI debe contener 8 digitos.")
-                dni = input("Ingrese el dni del Alumno: ")
+                dni = input("Ingrese el dni del Alumno: ").strip()
 
-        direccion = input("Dirección : ")
+        direccion = input("Dirección : ").strip()
         while len(direccion) < 3:
             print("Por favor, ingrese una direccion valida.")
-            direccion = input("Direccion: ")
+            direccion = input("Direccion: ").strip()
 
         opciones_validas = ["Masculino", "Femenino", "Transgenero", "No binario"]
-        genero = input("Género : ")
+        genero = input("Género : ").strip()
         while not genero.replace(" ", "").isalpha() or genero not in opciones_validas:
             print("Porfavor solo ingresar caracteres.")
             genero = input("Ingresar genero (masculino, femenino, transgero y no binario): ").capitalize()
 
         fechaNacimiento = input("Fecha de Nacimiento (YYYY-MM-DD) : ")
 
-        email = input("Email: ")
+        email = input("Email: ").strip()
         while "@" not in email:
             print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del Alumno: ")
+            email = input("Ingrese el correo electrónico del Alumno: ").strip()
 
-        curso_id = input("Curso ID : ")
+        curso_id = input("Curso ID : ").strip()
         while not curso_id.isdigit() or int(curso_id) < 1 or int(curso_id) > 6:
             print("El ID del curso debe ser un número entre 1 y 6.")
-            curso_id = input("Ingrese el ID del curso al que pertenece (1-6): ")
+            curso_id = input("Ingrese el ID del curso al que pertenece (1-6): ").strip()
         # Actualizar datos en la base de datos
         sql = """UPDATE alumnos
                         SET legajo = %s, nombre = %s, apellido = %s, dni = %s, direccion = %s, genero = %s,
@@ -326,7 +333,7 @@ def modificarProfesor():
         cursor = cone.cursor()
 
         # Solicitar el legajo del alumno que se desea modificar
-        idProfesor = input("Ingrese el Id del Profesor que desea modificar: ")
+        idProfesor = input("Ingrese el Id del Profesor que desea modificar: ").strip()
 
         # Verificar si el alumno existe
         select = "SELECT * FROM profesores WHERE idProfesor = %s"
@@ -349,48 +356,51 @@ def modificarProfesor():
         # Solicitar nuevos datos
         print("\nIngrese los nuevos datos del profesor:")
 
-        nombre = input("Ingrese el nombre del Profesor: ")
+        nombre = input("Ingrese el nombre del Profesor: ").strip()
         while not nombre.isalpha() or len(nombre) < 3:
             print("Por favor, solo ingrese caracteres.")
-            nombre = input("Ingrese el nombre del Profesor: ")
+            nombre = input("Ingrese el nombre del Profesor: ").strip()
 
-        apellido = input("Ingrese el apellido del Profesor: ")
+        apellido = input("Ingrese el apellido del Profesor: ").strip()
         while not apellido.isalpha() or len(apellido) < 3:
             print("Por favor, solo ingrese caracteres.")
-            apellido = input("Ingrese el apellido del Profesor: ")
+            apellido = input("Ingrese el apellido del Profesor: ").strip()
 
-        telefono = input("Ingrese el telefono del Profesor: ")
+        telefono = input("Ingrese el telefono del Profesor: ").strip()
         if len(telefono) != 10 or not telefono.isdigit():
             while (len(telefono) != 10 or not telefono.isdigit()):
                 print("El telefono debe contener 10 digitos.")
-                telefono = input("Ingrese el telefono del profesor: ")
+                telefono = input("Ingrese el telefono del profesor: ").strip()
 
-        email = input("Ingrese la email del Profesor: ")
+        email = input("Ingrese la email del Profesor: ").strip()
         while "@" not in email:
             print("El correo electrónico no es válido. Debe contener un '@'.")
-            email = input("Ingrese el correo electrónico del profesor: ")
+            email = input("Ingrese el correo electrónico del profesor: ").strip()
 
-        dni = input("Ingrese el dni del Profesor: ")
+        dni = input("Ingrese el dni del Profesor: ").strip()
         if len(dni) !=8 or not dni.isdigit():
             while(len(dni) !=8 or not dni.isdigit()):
                 print("El DNI debe contener 8 digitos.")
-                dni = input("Ingrese el dni del Profesor: ")
+                dni = input("Ingrese el dni del Profesor: ").strip()
 
         fechaNacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
 
         matricula = input("Ingrese el matricula del Profesor: ")
+        while not dato.isalnum():
+            print("Porfavor solo ingresar caracteres alfanumerico.")
+            dato = input("Ingresar matricula").strip()
 
-        direccion = input("Ingrese la direccion del Profesor: ")
+        direccion = input("Ingrese la direccion del Profesor: ").strip()
         while len(direccion) < 3:
             print("Por favor, ingrese una direccion valida.")
-            direccion = input("Ingrese el nombre del Profesor: ")
+            direccion = input("Ingrese el nombre del Profesor: ").strip()
 
-        horas = input("Ingrese las horas: ")
+        horas = input("Ingrese las horas: ").strip()
 
-        sueldo = input("Ingrese el sueldo: ")
+        sueldo = input("Ingrese el sueldo: ").strip()
         while not sueldo.isdigit() or int(sueldo) <= 200000:
             print("El sueldo debe ser un número mayor a 200000.")
-            sueldo = input("Ingrese el sueldo del profesor: ")
+            sueldo = input("Ingrese el sueldo del profesor: ").strip()
 
         # Actualizar datos en la base de datos
         sql = """UPDATE profesores SET nombre = %s, apellido = %s, telefono = %s, email = %s, dni = %s, fechaNacimiento = %s, matricula = %s, direccion = %s , horas = %s ,sueldo = %s  WHERE idProfesor = %s """
@@ -444,7 +454,7 @@ def modificarAlumnoEspecifico():
 
         # menu
 
-        menu = int(input("¿Qué dato desea modificar?: "))
+        menu = int(input("¿Qué dato desea modificar?: ").strip())
         if menu == 1:
 
             nlegajo = input("Legajo: ")
@@ -458,10 +468,10 @@ def modificarAlumnoEspecifico():
 
         elif menu == 2:
 
-            nombre = input("Nombre: ")
+            nombre = input("Nombre: ").strip()
             while not nombre.isalpha() or len(nombre) < 3:
                 print("Por favor, solo ingrese caracteres.")
-                nombre = input("Ingrese el nombre del Alumno: ")
+                nombre = input("Ingrese el nombre del Alumno: ").strip()
             
             sql = "UPDATE alumnos SET Nombre = %s WHERE legajo = %s"
             valor = (nombre.title(), legajo)
@@ -472,10 +482,10 @@ def modificarAlumnoEspecifico():
 
         elif menu == 3:
 
-            apellido = input("Apellido: ")
+            apellido = input("Apellido: ").strip()
             while not apellido.isalpha() or len(apellido) < 3:
                 print("Por favor, solo ingrese caracteres.")
-                apellido = input("Ingrese el apellido del Alumno: ")
+                apellido = input("Ingrese el apellido del Alumno: ").strip()
 
             sql = "UPDATE alumnos SET apellido = %s WHERE legajo = %s"
             valor = (apellido.title(), legajo)
@@ -486,11 +496,11 @@ def modificarAlumnoEspecifico():
 
         elif menu == 4:
 
-            dni = input("DNI: ")
+            dni = input("DNI: ").strip()
             if len(dni) !=8 or not dni.isdigit():
                 while(len(dni) !=8 or not dni.isdigit()):
                     print("El DNI debe contener 8 digitos.")
-                    dni = input("Ingrese el dni del Alumno: ")
+                    dni = input("Ingrese el dni del Alumno: ").strip()
 
             sql = "UPDATE alumnos SET dni = %s WHERE legajo = %s"
             valor = (dni, legajo)
@@ -501,10 +511,10 @@ def modificarAlumnoEspecifico():
 
         elif menu == 5:
 
-            direccion = input("Direccion: ")
+            direccion = input("Direccion: ").strip()
             while len(direccion) < 3:
                 print("Por favor, solo ingrese caracteres.")
-                direccion = input("Direccion: ")
+                direccion = input("Direccion: ").strip()
             sql = "UPDATE alumnos SET direccion = %s WHERE legajo = %s"
             valor = (direccion.title(), legajo)
             cursor.execute(sql, (valor))
@@ -538,10 +548,10 @@ def modificarAlumnoEspecifico():
 
         elif menu == 8:
 
-            email = input("Email: ")
+            email = input("Email: ").strip()
             while "@" not in email:
                 print("El correo electrónico no es válido. Debe contener un '@'.")
-                email = input("Ingrese el correo electrónico del profesor: ")
+                email = input("Ingrese el correo electrónico del profesor: ").strip()
 
             sql = "UPDATE alumnos SET email = %s WHERE legajo = %s"
             valor = (email.lower(), legajo)
@@ -552,10 +562,10 @@ def modificarAlumnoEspecifico():
 
         elif menu == 9:
 
-            cursos_idCurso = input("Curso ID: ")
+            cursos_idCurso = input("Curso ID: ").strip()
             while not cursos_idCurso.isdigit() or int(cursos_idCurso) < 1 or int(cursos_idCurso) > 6:
                 print("El ID del curso debe ser un número entre 1 y 6.")
-                cursos_idCurso = input("Ingrese el ID del curso al que pertenece (1-6): ")
+                cursos_idCurso = input("Ingrese el ID del curso al que pertenece (1-6): ").strip()
 
             sql = "UPDATE alumnos SET cursos_idCurso = %s WHERE legajo = %s"
             valor = (cursos_idCurso, legajo)
@@ -607,10 +617,10 @@ def modificarProfesorEspecifico():
         menu = int(input("¿Qué dato desea modificar? :"))
         if menu == 1:
 
-            nombre = input("Nombre: ")
+            nombre = input("Nombre: ").strip()
             while not nombre.isalpha() or len(nombre) < 3:
                 print("Por favor, solo ingrese caracteres.")
-                nombre = input("Ingrese el nombre del Profesor: ")
+                nombre = input("Ingrese el nombre del Profesor: ").strip()
 
             sql = "UPDATE profesores SET Nombre = %s WHERE idProfesor = %s"
             valor = (nombre.title(), idProfesor)
@@ -621,10 +631,10 @@ def modificarProfesorEspecifico():
 
         elif menu == 2:
 
-            apellido = input("Apellido: ")
+            apellido = input("Apellido: ").strip()
             while not apellido.isalpha() or len(apellido) < 3:
                 print("Por favor, solo ingrese caracteres.")
-                apellido = input("Ingrese el apellido del Profesor: ")
+                apellido = input("Ingrese el apellido del Profesor: ").strip()
 
             sql = "UPDATE profesores SET apellido = %s WHERE idProfesor = %s"
             valor = (apellido.title(), idProfesor)
@@ -635,11 +645,11 @@ def modificarProfesorEspecifico():
 
         elif menu == 3:
 
-            telefono = input("Telefono: ")
+            telefono = input("Telefono: ").strip()
             if len(telefono) != 10 or not telefono.isdigit():
                 while (len(telefono) != 10 or not telefono.isdigit()):
                     print("El telefono debe contener 10 digitos.")
-                    telefono = input("Ingrese el telefono del profesor: ")
+                    telefono = input("Ingrese el telefono del profesor: ").strip()
 
             sql = "UPDATE profesores SET telefono = %s WHERE idProfesor = %s"
             valor = (telefono, idProfesor)
@@ -650,10 +660,10 @@ def modificarProfesorEspecifico():
 
         elif menu == 4:
 
-            email = input("Email: ")
+            email = input("Email: ").strip()
             while "@" not in email:
                 print("El correo electrónico no es válido. Debe contener un '@'.")
-                email = input("Ingrese el correo electrónico del profesor: ")
+                email = input("Ingrese el correo electrónico del profesor: ").strip()
 
             sql = "UPDATE profesores SET email = %s WHERE idProfesor = %s"
             valor = (email.lower(), idProfesor)
@@ -664,11 +674,11 @@ def modificarProfesorEspecifico():
 
         elif menu == 5:
 
-            dni = input("Dni: ")
+            dni = input("Dni: ").strip()
             if len(dni) !=8 or not dni.isdigit():
                 while(len(dni) !=8 or not dni.isdigit()):
                     print("El DNI debe contener 8 digitos.")
-                    dni = input("Ingrese el dni del Profesor: ")
+                    dni = input("Ingrese el dni del Profesor: ").strip()
             sql = "UPDATE profesores SET dni = %s WHERE idProfesor = %s"
             valor = (dni, idProfesor)
             cursor.execute(sql, (valor))
@@ -690,6 +700,9 @@ def modificarProfesorEspecifico():
         elif menu == 7:
 
             matricula = input("Matricula: ")
+            while not dato.isalnum():
+                print("Porfavor solo ingresar caracteres alfanumerico.")
+                dato = input("Ingresar matricula").strip()
 
             sql = "UPDATE profesores SET matricula = %s WHERE idProfesor = %s"
             valor = (matricula, idProfesor)
@@ -700,10 +713,10 @@ def modificarProfesorEspecifico():
 
         elif menu == 8:
 
-            direccion = input("Direccion: ")
+            direccion = input("Direccion: ").strip()
             while len(direccion) < 3:
                 print("Por favor, ingresar una direccion valida.")
-                direccion = input("Direccion: ")
+                direccion = input("Direccion: ").strip()
             sql = "UPDATE profesores SET direccion = %s WHERE idProfesor = %s"
             valor = (direccion.title(), idProfesor)
             cursor.execute(sql, (valor))
@@ -724,10 +737,10 @@ def modificarProfesorEspecifico():
 
         elif menu == 10:
 
-            sueldo = input("Sueldo: ")
+            sueldo = input("Sueldo: ").strip()
             while not sueldo.isdigit() or int(sueldo) <= 200000:
                 print("El sueldo debe ser un número mayor a 200000.")
-                sueldo = input("Ingrese el sueldo del profesor: ")
+                sueldo = input("Ingrese el sueldo del profesor: ").strip()
 
             sql = "UPDATE profesores SET sueldo = %s WHERE idProfesor = %s"
             valor = (sueldo, idProfesor)
