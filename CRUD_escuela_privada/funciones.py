@@ -183,7 +183,7 @@ def ingresarProfesor():
         matricula = input("Ingrese el matricula del Profesor: ").strip()
         while not matricula.isalnum():
             print("Porfavor solo ingresar caracteres alfanumerico.")
-            matricula = input("Ingresar matricula").strip()
+            matricula = input("Ingresar matricula: ").strip()
 
         direccion = input("Ingrese la direccion del Profesor: ").strip()
         while len(direccion) < 3:
@@ -388,7 +388,7 @@ def modificarProfesor():
         matricula = input("Ingrese el matricula del Profesor: ")
         while not dato.isalnum():
             print("Porfavor solo ingresar caracteres alfanumerico.")
-            dato = input("Ingresar matricula").strip()
+            dato = input("Ingresar matricula: ").strip()
 
         direccion = input("Ingrese la direccion del Profesor: ").strip()
         while len(direccion) < 3:

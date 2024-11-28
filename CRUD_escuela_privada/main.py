@@ -21,23 +21,37 @@ def menuPrincipal():
             ejecutarOpcion(opcion)
 
 def ejecutarOpcion(opcion):
+    # Limpiar la consola
     if opcion == 1:
+        # Limpiar la consola
+        os.system("cls")
         print("Que datos desea ingresar?")
         print("[1]. Ingresar datos de Alumnos")
         print("[2]. Ingresar datos de Profesores")
         print("[3]. Volver al menu principal")
         opcion = int(input("Seleccione una opción: "))
         if opcion == 1:
+            # Limpiar la consola
+            os.system("cls")
             funciones.ingresarAlumnos()
         elif opcion == 2:
+            # Limpiar la consola
+            os.system("cls")
             funciones.ingresarProfesor()
+        else:
+            # Limpiar la consola
+            os.system("cls")
     elif opcion == 2:
+        # Limpiar la consola
+        os.system("cls")
         print("Que datos desea modificar?")
         print("[1]. modificar datos de Alumnos")
         print("[2]. modificar datos de Profesores")
         print("[3]. Volver al menu principal")
         opcion = int(input("Seleccione una opción: "))
         if opcion == 1:
+            # Limpiar la consola
+            os.system("cls")
             print("Alumnos")
             print("[1]. modificar todos los datos")
             print("[2]. modificar un dato específico")
@@ -48,16 +62,27 @@ def ejecutarOpcion(opcion):
             elif opcion == 2:
                 funciones.modificarAlumnoEspecifico()
         elif opcion == 2:
+            # Limpiar la consola
+            os.system("cls")
             print("Profesores")
             print("[1]. modificar todos los datos")
             print("[2]. modificar un dato específico")
             opcion = int(input("Seleccione una opción: "))
             if opcion == 1:
+                # Limpiar la consola
+                os.system("cls")
                 funciones.modificarProfesor()
             elif opcion == 2:
-                funciones.modificarProfesorEspecifico()         
+                # Limpiar la consola
+                os.system("cls")
+                funciones.modificarProfesorEspecifico() 
+        else:
+            # Limpiar la consola
+            os.system("cls")        
     elif opcion == 3:  # Mostrar datos
         while True:
+            # Limpiar la consola
+            os.system("cls")
             print("\nElija una opción")
             print("[1]. Mostrar todos los datos de alumnos")
             print("[2]. Mostrar todos los datos de profesores")
@@ -71,6 +96,8 @@ def ejecutarOpcion(opcion):
                 print("Ver profesores")  # Llama a la funcion mostrar todos los profesores
             elif opcion == 3:  # Buscar en especifico
                 while True:
+                    # Limpiar la consola
+                    os.system("cls")
                     print("\n¿De quien quiere ver sus datos?")
                     print("[1]. Alumno")
                     print("[2]. Profesor")
@@ -196,9 +223,9 @@ def ejecutarOpcion(opcion):
                             comandoSQL = "matricula"
                             dato = input ("Ingresar matricula: ").strip()
 
-                            while not dato.isalnum():
+                            while not matricula.isalnum():
                                 print("Porfavor solo ingresar caracteres alfanumerico.")
-                                dato = input("Ingresar matricula").strip()
+                                matricula = input("Ingresar matricula: ").strip()
                             funciones.buscarEspecificoProfesor(dato, comandoSQL)
                         #Volver a atras    
                         elif opcion == 6:
@@ -210,6 +237,8 @@ def ejecutarOpcion(opcion):
                     else:
                         print("Opcion invalida")
             elif opcion == 4:
+                # Limpiar la consola
+                os.system("cls")
                 print("Volviendo")
                 break
             else:
@@ -217,6 +246,8 @@ def ejecutarOpcion(opcion):
     # Eliminar datos
     elif opcion == 4:  
         while True:
+            # Limpiar la consola
+            os.system("cls")
             print("\n¿A quién desea dar de baja?")
             print("[1]. Dar de baja a un alumno")
             print("[2]. Dar de baja a un profesor")
@@ -224,6 +255,8 @@ def ejecutarOpcion(opcion):
             opcion = int(input("Seleccione una opción: "))
             #Eliminar Alumno
             if opcion == 1:
+                # Limpiar la consola
+                os.system("cls")
                 funciones.motrarAlumnos()
                 dato = input("Ingrese el legajo del Alumno que desea eliminar: ").strip()
                 while not dato.isdigit() :
@@ -231,7 +264,9 @@ def ejecutarOpcion(opcion):
                     dato = input("Ingrese el Legajo del Alumno que desea eliminar: ").strip()
                 funciones.eliminarAlumno(dato)
             #Eliminar Profesor                
-            elif opcion ==2:    
+            elif opcion ==2:
+                # Limpiar la consola
+                os.system("cls")    
                 funciones.motrarProfes()
                 dato = input("Ingrese el ID del Profesor que desea eliminar: ").strip()
                 while not dato.isdigit():
@@ -240,6 +275,8 @@ def ejecutarOpcion(opcion):
                 funciones.eliminarProfe(dato)
             #Volver al menu principal 
             elif opcion == 3:
+                # Limpiar la consola
+                os.system("cls")
                 print("Volviendo al menú principal")
                 break
             else:
