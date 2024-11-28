@@ -247,7 +247,6 @@ def ejecutarOpcion(opcion):
     elif opcion == 4:  
         while True:
             # Limpiar la consola
-            os.system("cls")
             print("\n¿A quién desea dar de baja?")
             print("[1]. Dar de baja a un alumno")
             print("[2]. Dar de baja a un profesor")
@@ -256,23 +255,23 @@ def ejecutarOpcion(opcion):
             #Eliminar Alumno
             if opcion == 1:
                 # Limpiar la consola
-                os.system("cls")
                 funciones.motrarAlumnos()
                 dato = input("Ingrese el legajo del Alumno que desea eliminar: ").strip()
                 while not dato.isdigit() :
                     print("El Legajo tiene que contener solo 5 numeros enteros")
                     dato = input("Ingrese el Legajo del Alumno que desea eliminar: ").strip()
                 funciones.eliminarAlumno(dato)
+                
             #Eliminar Profesor                
             elif opcion ==2:
-                # Limpiar la consola
-                os.system("cls")    
+                # Limpiar la consola    
                 funciones.motrarProfes()
                 dato = input("Ingrese el ID del Profesor que desea eliminar: ").strip()
                 while not dato.isdigit():
                     print("El id tiene que contener solo numeros enteros")
                     dato = input("Ingrese el ID del Profesor que desea eliminar: ").strip()   
                 funciones.eliminarProfe(dato)
+
             #Volver al menu principal 
             elif opcion == 3:
                 # Limpiar la consola

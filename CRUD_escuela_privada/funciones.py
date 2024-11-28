@@ -873,6 +873,7 @@ def eliminarAlumno(dato):
         query = "DELETE FROM alumnos WHERE legajo = %s" #Intruccion para eliminar un alumno
         cursor.execute(query, (dato,))         
         conexion.commit() # Confirmo los cambios en la BD
+        os.system("cls")
         print("Alumno eliminado exitosamente.")   
     except Exception as e:
         print(f"Ocurrio un error durante la consulta: {e}")
@@ -892,6 +893,7 @@ def eliminarProfe(dato):
         query = "DELETE FROM profesores WHERE idProfesor = %s" #Intruccion para eliminar un profe
         cursor.execute(query, (dato,))         
         conexion.commit() # Confirmo los cambios en la BD 
+        os.system("cls")
         print("Porfesor dado de baja exitosamente.")   
     except Exception as e:
         print(f"Ocurrio un error durante la consulta: {e}")
