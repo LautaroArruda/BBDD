@@ -21,7 +21,6 @@ def menuPrincipal():
             ejecutarOpcion(opcion)
 
 def ejecutarOpcion(opcion):
-    # Limpiar la consola
     if opcion == 1:
         # Limpiar la consola
         os.system("cls")
@@ -96,8 +95,6 @@ def ejecutarOpcion(opcion):
                 print("Ver profesores")  # Llama a la funcion mostrar todos los profesores
             elif opcion == 3:  # Buscar en especifico
                 while True:
-                    # Limpiar la consola
-                    os.system("cls")
                     print("\n¿De quien quiere ver sus datos?")
                     print("[1]. Alumno")
                     print("[2]. Profesor")
@@ -120,10 +117,9 @@ def ejecutarOpcion(opcion):
                             comandoSQL = "legajo"
                             dato= input("Ingresar legajo: ").strip()
                             #Legajo alumno
-                            if len(dato) !=5 or not dato.isdigit():
-                                while(len(dato) !=5 or not dato.isdigit()):
-                                    print("El legajo debe contener 5 digitos.")
-                                    dato = input("Ingrese el legajo: ").strip()
+                            while(not dato.isdigit()):
+                                print("El legajo debe contener solo digitos.")
+                                dato = input("Ingrese el legajo: ").strip()
                             funciones.buscarEspecificoAlumnos(dato, comandoSQL)
 
                         #DNI alumno
@@ -184,7 +180,7 @@ def ejecutarOpcion(opcion):
                         #Legajo profesor
                         if opcion2 == 1 :
                             comandoSQL = "idProfesor"
-                            dato = input ("Ingresar legajo: ").strip()
+                            dato = input ("Ingresar ID de profesor: ").strip()
                             while not dato.isdigit():
                                 print("porfavor solo ingresar numeros")
                                 dato = input ("Ingresar legajo: ").strip()

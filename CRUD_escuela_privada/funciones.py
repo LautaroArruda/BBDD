@@ -66,8 +66,6 @@ def ingresarAlumnos():
         cone = conexion.conexionBD()  # Usa el atributo `.conexion` de la clase Conexion
         cursor = cone.cursor()
 
-        legajo = input("Ingrese el legajo del alumno: ")
-
         # Ingreso de nombre del alumno
         nombre = input("Ingrese el nombre del alumno: ").strip()
         while not nombre.isalpha() or len(nombre) < 3:
@@ -116,15 +114,17 @@ def ingresarAlumnos():
             cursos_idCurso = input("Ingrese el ID del curso al que pertenece (1-6): ")
 
         # Consulta SQL para insertar datos
-        sql = """INSERT INTO alumnos (legajo, nombre, apellido, dni, direccion, genero,
+        sql = """INSERT INTO alumnos (nombre, apellido, dni, direccion, genero,
                  fechaNacimiento, email, cursos_idCurso)
-                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        valores = (legajo, nombre.title(), apellido.title(), dni, direccion.title(),
+                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+        valores = ( nombre.title(), apellido.title(), dni, direccion.title(),
                    genero, fechaNacimiento, email.lower(), cursos_idCurso)
 
         # Ejecutar la consulta
         cursor.execute(sql, valores)
         cone.commit()  # Confirmar los cambios en la base de datos
+        # Limpiar la consola
+        os.system("cls")
         print(f"{cursor.rowcount} registro(s) ingresado(s) exitosamente.")
 
         # Cerrar el cursor y la conexión
@@ -212,6 +212,8 @@ def ingresarProfesor():
         # Ejecutar la consulta
         cursor.execute(sql, valores)
         cone.commit()  # Confirmar los cambios en la base de datos
+        # Limpiar la consola
+        os.system("cls")
         print(f"{cursor.rowcount} registro(s) ingresado(s) exitosamente.")
 
         # Cerrar el cursor y la conexión
@@ -444,29 +446,19 @@ def modificarAlumnoEspecifico():
         if not resultado:
             print("No se encontró un alumno con el legajo proporcionado.")
             return
-
+        # Limpiar la consola
+        os.system("cls")
         print("Datos actuales del alumno:")
         print(
-            f"\n[1] . Legajo: {resultado[0]}\n[2] . Nombre: {resultado[1]}\n[3] . Apellido: {resultado[2]}\n[4] . DNI: {resultado[3]}")
+            f"\n[1] . Nombre: {resultado[0]}\n[2] . Apellido: {resultado[1]}\n[3] . DNI: {resultado[2]}")
         print(
-            f"[5] . Dirección: {resultado[4]}\n[6] . Género: {resultado[5]}\n[7] . Fecha de Nacimiento: {resultado[6]}")
-        print(f"[8] . Email: {resultado[7]}\n[9] . Curso ID: {resultado[8]}\n")
+            f"[4] . Dirección: {resultado[3]}\n[5] . Género: {resultado[4]}\n[6] . Fecha de Nacimiento: {resultado[5]}")
+        print(f"[7] . Email: {resultado[6]}\n[8] . Curso ID: {resultado[7]}\n")
 
         # menu
 
         menu = int(input("¿Qué dato desea modificar?: ").strip())
         if menu == 1:
-
-            nlegajo = input("Legajo: ")
-
-            sql = "UPDATE alumnos SET legajo = %s WHERE legajo = %s"
-            valor = (nlegajo, legajo)
-            cursor.execute(sql, (valor))
-            cone.commit()
-
-            print("datos actualizado correctamente.")
-
-        elif menu == 2:
 
             nombre = input("Nombre: ").strip()
             while not nombre.isalpha() or len(nombre) < 3:
@@ -480,7 +472,7 @@ def modificarAlumnoEspecifico():
 
             print("datos actualizado correctamente.")
 
-        elif menu == 3:
+        elif menu == 2:
 
             apellido = input("Apellido: ").strip()
             while not apellido.isalpha() or len(apellido) < 3:
@@ -494,7 +486,7 @@ def modificarAlumnoEspecifico():
 
             print("datos actualizado correctamente.")
 
-        elif menu == 4:
+        elif menu == 3:
 
             dni = input("DNI: ").strip()
             if len(dni) !=8 or not dni.isdigit():
@@ -509,7 +501,7 @@ def modificarAlumnoEspecifico():
 
             print("datos actualizado correctamente.")
 
-        elif menu == 5:
+        elif menu == 4:
 
             direccion = input("Direccion: ").strip()
             while len(direccion) < 3:
@@ -522,7 +514,7 @@ def modificarAlumnoEspecifico():
 
             print("datos actualizado correctamente.")
 
-        elif menu == 6:
+        elif menu == 5:
             opciones_validas = ["Masculino", "Femenino", "Transgenero", "No binario"]
             genero = input("Genero: ")
             while not genero.replace(" ", "").isalpha() or genero not in opciones_validas:
@@ -535,7 +527,7 @@ def modificarAlumnoEspecifico():
 
             print("datos actualizado correctamente.")
 
-        elif menu == 7:
+        elif menu == 6:
 
             fechaNacimiento = input("Fecha de  nacimiento: ")
 
@@ -546,7 +538,7 @@ def modificarAlumnoEspecifico():
 
             print("datos actualizado correctamente.")
 
-        elif menu == 8:
+        elif menu == 7:
 
             email = input("Email: ").strip().lower()
             while "@" not in email:
@@ -560,7 +552,7 @@ def modificarAlumnoEspecifico():
 
             print("datos actualizado correctamente.")
 
-        elif menu == 9:
+        elif menu == 8:
 
             cursos_idCurso = input("Curso ID: ").strip()
             while not cursos_idCurso.isdigit() or int(cursos_idCurso) < 1 or int(cursos_idCurso) > 6:
@@ -603,7 +595,8 @@ def modificarProfesorEspecifico():
         if not resultado:
             print("No se encontró un alumno con el legajo proporcionado.")
             return
-
+        # Limpiar la consola
+        os.system("cls")
         print("Datos actuales del profesor:")
         print(
             f"\n[1] . Nombre: {resultado[1]}\n[2] . Apellido: {resultado[2]}\n[3] . Telefono: {resultado[3]}")
@@ -781,8 +774,6 @@ def buscarEspecificoProfesor(dato, comandoSQL):
             for idProfesor, nombre, apellido, telefono, email, dni, matricula, direccion, horas, sueldo in resultados:
                 print(f"Legajo: {idProfesor}, Nombre: {nombre}, Apellido: {apellido}, DNI: {dni}, Matricula: {matricula}, Telefono: {telefono}, Email: {email}, Direccion: {direccion}, Horas: {horas}, Sueldo: {sueldo}") 
         else:
-            # Limpiar la consola
-            os.system("cls")
             print(f"No se encontraron registros con: {dato}")
             
     except Exception as e:
@@ -795,7 +786,7 @@ def buscarEspecificoAlumnos(dato, comandoSQL):
     conexion_instancia = Conexion()  #Creo una instancia de la conexión
     conexion = conexion_instancia.conexionBD() #Obtengo la conexión a la base de datos
 
-    # si conoxios es vacio o nada entra a la validacion
+    # si conexion es vacio o nada entra a la validacion
     if (conexion is None):
         print("Error: No se pudo establecer conexión con la base de datos.")
         return
@@ -816,8 +807,6 @@ def buscarEspecificoAlumnos(dato, comandoSQL):
             for legajo, nombre, apellido, email, direccion, genero in resultados:
                 print(f"Legajo: {legajo}, Nombre: {nombre}, Apellido: {apellido}, Email: {email}, Direccion: {direccion}, Genero: {genero}")# f-strings permite insertar los valores de las variables dentro de la cadena directamente, de forma legible.
         else:
-            # Limpiar la consola
-            os.system("cls")
             print(f"No se encontraron registros con: {dato}")
         
     except Exception as e:
